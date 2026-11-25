@@ -8,6 +8,7 @@ A collection of React projects and experiments. Each project lives in its own fo
 
 An accessible task manager that demonstrates safe form handling, immutable React state, and basic CRUD interactions.
 
+- [Live demo](https://walkrantrolls.github.io/react/)
 - [Open the Todo List source](./todo-list/)
 - [Read the engineering notes](./todo-list/docs/implementation.md)
 
@@ -32,6 +33,7 @@ npm run build
 
 ```text
 react/
+├── .github/workflows/deploy-todo-list.yml
 └── todo-list/
     ├── docs/
     ├── src/
