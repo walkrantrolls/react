@@ -2,7 +2,12 @@ name: Deploy Todo List
 
 on:
   push:
-    branches: [main, "codex/todo-list-app"]
+    branches: [main]
+    paths:
+      - "todo-list/**"
+      - ".github/workflows/deploy-todo-list.yml"
+  pull_request:
+    branches: [main]
     paths:
       - "todo-list/**"
       - ".github/workflows/deploy-todo-list.yml"
@@ -44,6 +49,7 @@ jobs:
           path: todo-list/dist
 
   deploy:
+    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

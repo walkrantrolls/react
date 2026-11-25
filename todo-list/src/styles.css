@@ -21,13 +21,47 @@ button, input { font: inherit; }
 button { color: inherit; }
 
 .page-shell {
-  width: min(100% - 40px, 1040px);
+  width: min(100% - 72px, 960px);
   min-height: 100vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   padding: 28px 0 22px;
 }
+
+.app-layout { min-height: 100vh; display: grid; grid-template-columns: 258px minmax(0, 1fr); }
+.project-sidebar { position: sticky; top: 0; display: flex; flex-direction: column; height: 100vh; min-height: 600px; padding: 28px 17px 19px; color: #eaf0e8; background: #183b2e; }
+.sidebar-brand { display: inline-flex; align-items: center; gap: 10px; width: fit-content; color: #f5f7ef; font-size: 19px; font-weight: 700; letter-spacing: -.05em; text-decoration: none; }
+.sidebar-brand-mark { display: grid; width: 31px; height: 31px; place-items: center; border: 1px solid rgb(220 237 166 / 30%); border-radius: 10px 10px 10px 3px; color: #d5eb70; font-family: "Playfair Display", serif; font-size: 19px; font-style: italic; }
+.sidebar-brand-dot { color: #d5eb70; }
+.sidebar-heading { margin: 76px 5px 38px; }
+.sidebar-kicker, .sidebar-section-label { color: #a9c0ac; font: 9px "DM Mono", monospace; letter-spacing: .12em; }
+.sidebar-kicker { margin: 0 0 12px; }
+.sidebar-title { margin: 0; color: #f3f5ec; font-size: 23px; letter-spacing: -.05em; font-weight: 600; }
+.sidebar-description { max-width: 170px; margin: 9px 0 0; color: #a9b9ae; font-size: 11px; line-height: 1.6; }
+.project-navigation { margin: 0; }
+.sidebar-section-label { display: flex; justify-content: space-between; margin: 0 9px 12px; }
+.sidebar-section-label span { color: #d5eb70; }
+.project-tablist { display: flex; flex-direction: column; gap: 5px; }
+.project-tab { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 61px; padding: 9px 10px; border: 1px solid transparent; border-radius: 9px; color: #c5d2c8; background: transparent; text-align: left; cursor: pointer; transition: background .18s, border-color .18s, color .18s; }
+.project-tab:hover { color: #fff; background: rgb(255 255 255 / 5%); }
+.project-tab.is-active { border-color: rgb(220 237 166 / 14%); color: #fff; background: #285541; box-shadow: inset 3px 0 #d5eb70; }
+.project-tab:focus-visible { outline: 2px solid #d5eb70; outline-offset: 3px; }
+.project-tab-index { color: #a8bcab; font: 10px "DM Mono", monospace; }
+.project-tab.is-active .project-tab-index { color: #d5eb70; }
+.project-tab-copy { display: grid; flex: 1; gap: 3px; }
+.project-tab-name { font-size: 12px; font-weight: 600; }
+.project-tab-summary { color: #aab9ad; font-size: 10px; }
+.project-tab-arrow { color: #d5eb70; font-size: 12px; opacity: 0; transform: translate(-3px, 3px); transition: opacity .18s, transform .18s; }
+.project-tab.is-active .project-tab-arrow, .project-tab:hover .project-tab-arrow { opacity: 1; transform: translate(0, 0); }
+.sidebar-footer { display: flex; align-items: center; gap: 8px; margin-top: auto; padding: 14px 5px 2px; border-top: 1px solid rgb(234 240 232 / 13%); color: #a9b9ae; font: 8px "DM Mono", monospace; letter-spacing: .08em; }
+.sidebar-live-dot { width: 6px; height: 6px; flex: 0 0 auto; border-radius: 50%; background: #a9d179; box-shadow: 0 0 0 3px rgb(169 209 121 / 12%); }
+.sidebar-footer a { margin-left: auto; color: #d5eb70; font: 15px "DM Sans", sans-serif; text-decoration: none; }
+.project-main { min-width: 0; }
+.project-panel { display: flex; flex-direction: column; min-height: 100vh; outline: none; }
+.project-panel:focus-visible { outline: 2px solid #81a88c; outline-offset: -4px; }
+.project-panel > .topbar { flex: 0 0 auto; }
+.project-panel > .intro { flex: 0 0 auto; }
 .topbar, .brand, .topbar-note, .eyebrow, .list-heading, .list-toolbar, .filter-list, .task-row, .page-footer {
   display: flex;
   align-items: center;
@@ -99,4 +133,20 @@ h1 em { color: var(--green); font-family: "Playfair Display", serif; font-weight
   .filter-button { padding: 8px 7px; font-size: 10px; }
   .task-row { gap: 9px; }
   .page-footer { align-items: flex-start; gap: 8px; font-size: 9px; }
+}
+
+@media (max-width: 760px) {
+  .app-layout { display: block; }
+  .project-sidebar { position: relative; height: auto; min-height: 0; padding: 15px 18px 12px; }
+  .sidebar-brand { font-size: 16px; }
+  .sidebar-brand-mark { width: 27px; height: 27px; font-size: 16px; }
+  .sidebar-heading { display: none; }
+  .project-navigation { margin-top: 16px; }
+  .sidebar-section-label { margin: 0 3px 7px; }
+  .project-tablist { flex-direction: row; gap: 7px; overflow-x: auto; padding: 0 0 5px; }
+  .project-tab { flex: 0 0 auto; width: auto; min-width: 150px; min-height: 49px; padding: 7px 10px; }
+  .project-tab.is-active { box-shadow: inset 0 -3px #d5eb70; }
+  .project-tab-arrow { display: none; }
+  .sidebar-footer { display: none; }
+  .page-shell { width: min(100% - 28px, 960px); min-height: calc(100vh - 125px); }
 }
