@@ -6,7 +6,7 @@ A collection of React projects and experiments. Each project lives in its own fo
 
 ### Todo List
 
-An accessible task manager that demonstrates safe form handling, immutable React state, and basic CRUD interactions.
+An accessible task manager that demonstrates safe form handling, immutable React state, and basic CRUD interactions. Navigate projects from the app’s sidebar tabs; the registry is ready for future projects.
 
 - [Live demo](https://walkrantrolls.github.io/react/)
 - [Open the Todo List source](./todo-list/)

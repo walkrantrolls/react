@@ -92,4 +92,14 @@ describe("Todo List", () => {
       "true",
     );
   });
+  it("shows projects as selectable sidebar tabs", () => {
+    render(<App />);
+
+    const tablist = screen.getByRole("tablist", { name: "React projects" });
+    const todoTab = within(tablist).getByRole("tab", { name: /Todo List/ });
+
+    expect(todoTab).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel", { name: /Todo List/ })).toBeInTheDocument();
+  });
+
 });
