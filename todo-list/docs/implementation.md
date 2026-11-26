@@ -34,6 +34,10 @@ The pure operations in `src/todoModel.js` return new arrays and never mutate the
 6. The delete button calls `removeTask`; the returned array omits the selected task.
 7. Completion state is toggled immutably, and filters derive a visible subset without changing stored tasks.
 
+## Tabs project
+
+The React project sidebar also includes a reusable Tabs component demo. Its API and behavior are documented in [tabs.md](./tabs.md), including initial selection, independent instances, keyboard interaction, edge cases, and tests.
+
 ## Project sidebar
 
 The project registry in `src/App.jsx` drives the sidebar tab list. Each registry entry supplies a stable ID, label, short description, and React component. Selecting a tab renders its project in the associated tab panel. Left/right and up/down arrows move between project tabs; Home and End select the first and last tab. On narrow screens, the sidebar becomes a horizontally scrollable project strip.

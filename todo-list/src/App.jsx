@@ -181,6 +181,12 @@ const PROJECTS = [
     summary: "Task manager",
     component: TodoListProject,
   },
+  {
+    id: "tabs",
+    label: "Tabs",
+    summary: "Reusable UI component",
+    component: TabsProject,
+  },
 ];
 
 export default function App() {

@@ -102,4 +102,15 @@ describe("Todo List", () => {
     expect(screen.getByRole("tabpanel", { name: /Todo List/ })).toBeInTheDocument();
   });
 
+  it("opens the Tabs project from the sidebar", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const tablist = screen.getByRole("tablist", { name: "React projects" });
+    await user.click(within(tablist).getByRole("tab", { name: /Tabs/ }));
+
+    expect(screen.getByRole("heading", { name: /One pattern/ })).toBeInTheDocument();
+    expect(screen.getByRole("tablist", { name: "Web foundations" })).toBeInTheDocument();
+  });
+
 });
