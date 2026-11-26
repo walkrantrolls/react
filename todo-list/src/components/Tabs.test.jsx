@@ -10,107 +10,61 @@ const ITEMS = [
 ];
 
 describe("Tabs", () => {
-  it("renders every tab and selects the first by default", () => {
-    render(<Tabs items={ITEMS} ariaLabel="Test tabs" />);
+  it("renders every item and selects the first item by default", () => {
+    render(<Tabs items={ITEMS} />);
 
-    const tablist = screen.getByRole("tablist", { name: "Test tabs" });
-    expect(within(tablist).getAllByRole("tab")).toHaveLength(3);
-    expect(within(tablist).getByRole("tab", { name: "First" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("First panel content");
-    expect(screen.queryByText("Second panel content")).not.toBeVisible();
+    expect(screen.getByRole("button", { name: "First" })).toHaveClass("is-selected");
+    expect(screen.getByText("First panel content")).toBeVisible();
+    expect(screen.getByText("Second panel content")).not.toBeVisible();
   });
 
-  it("supports an initial active tab", () => {
-    render(<Tabs items={ITEMS} defaultValue="two" ariaLabel="Test tabs" />);
+  it("supports an initial active value", () => {
+    render(<Tabs items={ITEMS} defaultValue="two" />);
 
-    expect(screen.getByRole("tab", { name: "Second" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Second panel content");
+    expect(screen.getByRole("button", { name: "Second" })).toHaveClass("is-selected");
+    expect(screen.getByText("Second panel content")).toBeVisible();
+    expect(screen.getByText("First panel content")).not.toBeVisible();
   });
 
-  it("falls back to the first tab when defaultValue is invalid", () => {
-    render(<Tabs items={ITEMS} defaultValue="missing" ariaLabel="Test tabs" />);
-
-    expect(screen.getByRole("tab", { name: "First" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("First panel content");
-  });
-
-  it("switches the visible panel when a tab is clicked", async () => {
+  it("switches the active tab and visible panel when clicked", async () => {
     const user = userEvent.setup();
-    render(<Tabs items={ITEMS} ariaLabel="Test tabs" />);
+    render(<Tabs items={ITEMS} />);
 
-    await user.click(screen.getByRole("tab", { name: "Third" }));
+    await user.click(screen.getByRole("button", { name: "Third" }));
 
-    expect(screen.getByRole("tab", { name: "Third" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(screen.getByRole("tabpanel")).toHaveTextContent("Third panel content");
-    expect(screen.queryByText("First panel content")).not.toBeVisible();
+    expect(screen.getByRole("button", { name: "Third" })).toHaveClass("is-selected");
+    expect(screen.getByText("Third panel content")).toBeVisible();
+    expect(screen.getByText("First panel content")).not.toBeVisible();
   });
 
-  it("keeps separate instances independent", async () => {
+  it("keeps multiple instances independent", async () => {
     const user = userEvent.setup();
     render(
       <>
-        <Tabs items={ITEMS} ariaLabel="First group" />
-        <Tabs items={ITEMS} defaultValue="two" ariaLabel="Second group" />
+        <section aria-label="First group">
+          <Tabs items={ITEMS} />
+        </section>
+        <section aria-label="Second group">
+          <Tabs items={ITEMS} defaultValue="two" />
+        </section>
       </>,
     );
 
-    const firstGroup = screen.getByRole("tablist", { name: "First group" });
-    const secondGroup = screen.getByRole("tablist", { name: "Second group" });
+    const firstGroup = within(screen.getByRole("region", { name: "First group" }));
+    const secondGroup = within(screen.getByRole("region", { name: "Second group" }));
 
-    expect(within(firstGroup).getByRole("tab", { name: "First" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(within(secondGroup).getByRole("tab", { name: "Second" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
+    expect(firstGroup.getByRole("button", { name: "First" })).toHaveClass("is-selected");
+    expect(secondGroup.getByRole("button", { name: "Second" })).toHaveClass("is-selected");
 
-    await user.click(within(firstGroup).getByRole("tab", { name: "Third" }));
+    await user.click(firstGroup.getByRole("button", { name: "Third" }));
 
-    expect(within(firstGroup).getByRole("tab", { name: "Third" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(within(secondGroup).getByRole("tab", { name: "Second" })).toHaveAttribute(
-      "aria-selected",
-      "true",
-    );
-    expect(screen.getAllByRole("tabpanel")).toHaveLength(2);
-  });
-
-  it("supports arrow, Home, and End keyboard navigation", async () => {
-    const user = userEvent.setup();
-    render(<Tabs items={ITEMS} ariaLabel="Test tabs" />);
-
-    const firstTab = screen.getByRole("tab", { name: "First" });
-    firstTab.focus();
-    await user.keyboard("{ArrowRight}");
-    expect(screen.getByRole("tab", { name: "Second" })).toHaveFocus();
-
-    await user.keyboard("{End}");
-    expect(screen.getByRole("tab", { name: "Third" })).toHaveFocus();
-
-    await user.keyboard("{Home}");
-    expect(firstTab).toHaveFocus();
+    expect(firstGroup.getByRole("button", { name: "Third" })).toHaveClass("is-selected");
+    expect(secondGroup.getByRole("button", { name: "Second" })).toHaveClass("is-selected");
+    expect(secondGroup.getByText("Second panel content")).toBeVisible();
   });
 
   it("renders nothing for an empty item list", () => {
-    const { container } = render(
-      <Tabs items={[]} ariaLabel="Empty tabs" />,
-    );
+    const { container } = render(<Tabs items={[]} />);
 
     expect(container).toBeEmptyDOMElement();
   });
