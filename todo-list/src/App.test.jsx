@@ -110,7 +110,7 @@ describe("Todo List", () => {
     await user.click(within(tablist).getByRole("tab", { name: /Tabs/ }));
 
     expect(screen.getByRole("heading", { name: /One pattern/ })).toBeInTheDocument();
-    expect(screen.getByRole("tablist", { name: "Web foundations" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "HTML" })).toBeInTheDocument();
   });
 
 });
