@@ -103,7 +103,7 @@ export default function TabsProject() {
           title="Web foundations"
           description="A documentation view with HTML selected by default."
         >
-          <Tabs items={FOUNDATION_TABS} defaultValue="html" ariaLabel="Web foundations" />
+          <Tabs items={FOUNDATION_TABS} defaultValue="html" />
         </TabsExampleCard>
 
         <TabsExampleCard
@@ -111,7 +111,7 @@ export default function TabsProject() {
           title="Team workflow"
           description="A second, independent instance starting on Build."
         >
-          <Tabs items={WORKFLOW_TABS} defaultValue="build" ariaLabel="Team workflow" />
+          <Tabs items={WORKFLOW_TABS} defaultValue="build" />
         </TabsExampleCard>
       </div>
 
