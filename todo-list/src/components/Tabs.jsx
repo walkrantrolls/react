@@ -1,92 +1,37 @@
-import { useId, useRef, useState } from "react";
+import { useState } from "react";
 
-export default function Tabs({ items, defaultValue, ariaLabel = "Tabs" }) {
-  const instanceId = useId();
-  const tabRefs = useRef(new Map());
-  const [activeValue, setActiveValue] = useState(() => {
-    if (items.some((item) => item.value === defaultValue)) return defaultValue;
-    return items[0]?.value ?? null;
-  });
-
-  function handleKeyDown(event, currentIndex) {
-    let nextIndex;
-
-    switch (event.key) {
-      case "ArrowRight":
-        nextIndex = (currentIndex + 1) % items.length;
-        break;
-      case "ArrowLeft":
-        nextIndex = (currentIndex - 1 + items.length) % items.length;
-        break;
-      case "Home":
-        nextIndex = 0;
-        break;
-      case "End":
-        nextIndex = items.length - 1;
-        break;
-      default:
-        return;
-    }
-
-    event.preventDefault();
-    const nextItem = items[nextIndex];
-    setActiveValue(nextItem.value);
-    tabRefs.current.get(nextItem.value)?.focus();
-  }
+export default function Tabs({ items, defaultValue }) {
+  const [activeValue, setActiveValue] = useState(
+    () => defaultValue ?? items[0]?.value ?? null,
+  );
 
   if (items.length === 0) return null;
 
   return (
     <div className="tabs-component">
-      <div className="tabs-component-list" role="tablist" aria-label={ariaLabel}>
-        {items.map((item, index) => {
-          const selected = item.value === activeValue;
-          const tabId = `${instanceId}-tab-${item.value}`;
-          const panelId = `${instanceId}-panel-${item.value}`;
+      <div className="tabs-component-list">
+        {items.map(({ label, value }) => {
+          const selected = value === activeValue;
 
           return (
             <button
-              aria-controls={panelId}
-              aria-selected={selected}
               className={`tabs-component-tab ${selected ? "is-selected" : ""}`}
-              id={tabId}
-              key={item.value}
-              onClick={() => setActiveValue(item.value)}
-              onKeyDown={(event) => handleKeyDown(event, index)}
-              ref={(node) => {
-                if (node) tabRefs.current.set(item.value, node);
-                else tabRefs.current.delete(item.value);
-              }}
-              role="tab"
-              tabIndex={selected ? 0 : -1}
+              key={value}
+              onClick={() => setActiveValue(value)}
               type="button"
             >
-              {item.label}
+              {label}
             </button>
           );
         })}
       </div>
 
       <div className="tabs-component-panels">
-        {items.map((item) => {
-          const selected = item.value === activeValue;
-          const tabId = `${instanceId}-tab-${item.value}`;
-          const panelId = `${instanceId}-panel-${item.value}`;
-
-          return (
-            <div
-              aria-labelledby={tabId}
-              className="tabs-component-panel"
-              hidden={!selected}
-              id={panelId}
-              key={item.value}
-              role="tabpanel"
-              tabIndex={0}
-            >
-              {item.panel}
-            </div>
-          );
-        })}
+        {items.map(({ panel, value }) => (
+          <div className="tabs-component-panel" hidden={value !== activeValue} key={value}>
+            {panel}
+          </div>
+        ))}
       </div>
     </div>
   );
