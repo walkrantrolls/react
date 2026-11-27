@@ -1,40 +1,5 @@
 import { useState } from "react";
 
-const TABS_DATA = [
-  {
-    label: "HTML",
-    key: "html",
-    panel: (
-      <p>
-        The HyperText Markup Language or HTML is the standard markup language
-        for documents designed to be displayed in a web browser.
-      </p>
-    ),
-  },
-  {
-    label: "CSS",
-    key: "css",
-    panel: (
-      <p>
-        Cascading Style Sheets is a style sheet language used for describing the
-        presentation of a document written in a markup language such as HTML or
-        XML.
-      </p>
-    ),
-  },
-  {
-    label: "Javascript",
-    key: "js",
-    panel: (
-      <p>
-        JavaScript, often abbreviated as JS, is a programming language that is
-        one of the core technologies of the World Wide Web, alongside HTML and
-        CSS.
-      </p>
-    ),
-  },
-];
-
 type TabItem = Readonly<{
   value: string;
   label: React.ReactNode;
