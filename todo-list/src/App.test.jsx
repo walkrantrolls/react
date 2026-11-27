@@ -92,6 +92,7 @@ describe("Todo List", () => {
       "true",
     );
   });
+
   it("shows projects as selectable sidebar tabs", () => {
     render(<App />);
 
@@ -109,8 +110,9 @@ describe("Todo List", () => {
     const tablist = screen.getByRole("tablist", { name: "React projects" });
     await user.click(within(tablist).getByRole("tab", { name: /Tabs/ }));
 
-    expect(screen.getByRole("heading", { name: /One pattern/ })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "HTML" })).toBeInTheDocument();
+    expect(screen.getByTitle("Tabs component demo")).toHaveAttribute(
+      "src",
+      "/tabs-demo.html",
+    );
   });
-
 });

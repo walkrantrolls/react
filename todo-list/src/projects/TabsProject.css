@@ -1,40 +1,7 @@
-.tabs-project { padding-bottom: 35px; }
-.tabs-project-intro { max-width: 670px; padding: 62px 0 34px; }
-.tabs-project-eyebrow { margin: 0 0 18px; color: #748077; font: 10px "DM Mono", monospace; letter-spacing: .12em; }
-.tabs-project-intro h1 { margin: 0; font-size: clamp(48px, 6vw, 72px); line-height: .98; letter-spacing: -.065em; font-weight: 600; }
-.tabs-project-intro h1 em { color: #285b45; font-family: "Playfair Display", serif; font-weight: 600; letter-spacing: -.055em; }
-.tabs-project-intro > p:last-child { max-width: 520px; margin: 18px 0 0; color: #68736b; font-size: 14px; line-height: 1.75; }
-.tabs-examples { display: grid; gap: 18px; }
-.tabs-example-card { padding: 22px 24px 20px; border: 1px solid #e8ebe3; border-radius: 15px; background: #fff; box-shadow: 0 12px 35px rgb(32 52 37 / 4%); }
-.tabs-example-card-heading { display: flex; gap: 13px; align-items: flex-start; margin-bottom: 20px; }
-.tabs-example-number { display: grid; width: 29px; height: 29px; flex: 0 0 auto; place-items: center; border-radius: 9px; color: #285b45; background: #edf3e7; font: 10px "DM Mono", monospace; }
-.tabs-example-card-heading h3 { margin: 1px 0 4px; color: #18231d; font-size: 15px; letter-spacing: -.02em; }
-.tabs-example-card-heading p { margin: 0; color: #899189; font-size: 11px; line-height: 1.5; }
-.tabs-component { min-width: 0; }
-.tabs-component-list { display: flex; gap: 4px; align-items: center; overflow-x: auto; border-bottom: 1px solid #e8ebe3; }
-.tabs-component-tab { position: relative; flex: 0 0 auto; border: 0; border-radius: 7px 7px 0 0; padding: 11px 14px 12px; color: #7a847b; background: transparent; font-size: 12px; font-weight: 500; cursor: pointer; transition: color .18s, background .18s; }
-.tabs-component-tab:hover { color: #285b45; background: #f5f7f1; }
-.tabs-component-tab.is-selected { color: #285b45; font-weight: 700; }
-.tabs-component-tab.is-selected::after { position: absolute; right: 10px; bottom: -1px; left: 10px; height: 2px; border-radius: 2px; background: #4f8a67; content: ""; }
-.tabs-component-tab:focus-visible { z-index: 1; outline: 2px solid #78a184; outline-offset: -3px; }
-.tabs-component-panel { min-height: 170px; padding: 19px 14px 13px; border-radius: 0 0 9px 9px; }
-.tabs-component-panel[hidden] { display: none; }
-.tabs-topic-index { color: #819084; font: 9px "DM Mono", monospace; letter-spacing: .1em; }
-.tabs-topic h3 { margin: 10px 0 6px; color: #203027; font-size: 18px; letter-spacing: -.035em; }
-.tabs-topic p { max-width: 580px; margin: 0; color: #748077; font-size: 12px; line-height: 1.7; }
-.tabs-topic code { display: inline-block; margin-top: 14px; padding: 8px 10px; border: 1px solid #e8ebe3; border-radius: 7px; color: #285b45; background: #f7f8f4; font: 10px "DM Mono", monospace; }
-.workflow-panel { display: flex; gap: 13px; align-items: flex-start; padding: 12px 2px; }
-.workflow-badge { flex: 0 0 auto; padding: 5px 7px; border-radius: 5px; color: #56715d; background: #edf3e7; font: 9px "DM Mono", monospace; }
-.workflow-panel strong { color: #24352a; font-size: 13px; }
-.workflow-panel p { margin: 5px 0 0; color: #7d877f; font-size: 11px; line-height: 1.6; }
-.tabs-concept-note { display: flex; gap: 11px; align-items: center; margin-top: 17px; padding: 13px 15px; border: 1px solid #e4e8de; border-radius: 10px; background: #edf3e7; }
-.tabs-concept-icon { color: #285b45; font-size: 17px; }
-.tabs-concept-note p { margin: 0; color: #647167; font-size: 11px; line-height: 1.6; }
-.tabs-concept-note strong { color: #285b45; }
-@media (max-width: 760px) {
-  .tabs-project-intro { padding: 38px 0 24px; }
-  .tabs-project-intro h1 { font-size: clamp(44px, 12vw, 62px); }
-  .tabs-example-card { padding: 17px 15px 14px; }
-  .tabs-component-tab { padding: 10px 11px 11px; font-size: 11px; }
-  .tabs-component-panel { padding-right: 9px; padding-left: 9px; }
+.tabs-project-frame {
+  display: block;
+  width: 100%;
+  min-height: min(720px, calc(100vh - 70px));
+  border: 0;
+  background: #fff;
 }
