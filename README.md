@@ -1,30 +1,30 @@
 # React projects
 
-A collection of React projects and experiments. Each project lives in its own folder so it can be developed and documented independently.
+A collection of React projects and experiments. Each project has its own implementation, tests, and notes; the shared playground provides project navigation and the live portfolio.
 
 ## Projects
 
-### Todo List
+- [Todo List](./projects/todo-list/) — task creation and deletion with plain-text rendering.
+- [Tabs](./projects/tabs/) — the supplied HTML/CSS/JavaScript tabs component challenge.
+- [Contact Form](./projects/contact-form/) — a labeled form that submits JSON to the GreatFrontEnd endpoint.
 
-An accessible task manager that demonstrates safe form handling, immutable React state, and basic CRUD interactions. Navigate projects from the app’s sidebar tabs; the registry is ready for future projects.
+## Live playground
 
-- [Live demo](https://walkrantrolls.github.io/react/)
-- [Open the live React portfolio](https://walkrantrolls.github.io/react/)
-- [Open the Todo List source](./todo-list/)
-- [Read the Todo List engineering notes](./todo-list/docs/implementation.md)
-- [Read the Tabs Component notes](./todo-list/docs/tabs.md)
+[Open the React playground](https://walkrantrolls.github.io/react/)
 
-## Running a project
+The sidebar switches between the Todo List, Tabs, and Contact Form projects.
 
-From the project folder:
+## Run locally
+
+The playground owns the Vite app and dependency setup:
 
 ```sh
-cd todo-list
+cd playground
 npm install
 npm run dev
 ```
 
-Run its tests and production build with:
+Run the project and integration tests, then build the site:
 
 ```sh
 npm test
@@ -35,11 +35,16 @@ npm run build
 
 ```text
 react/
-├── .github/workflows/deploy-todo-list.yml
-└── todo-list/
-    ├── docs/
-    ├── src/
-    ├── index.html
-    ├── package.json
-    └── vite.config.js
+├── .github/workflows/deploy-react-playground.yml
+├── playground/                 # Shared navigation shell and Pages build
+│   ├── src/
+│   ├── index.html
+│   ├── tabs-demo.html
+│   ├── contact-form-demo.html
+│   ├── package.json
+│   └── vite.config.js
+└── projects/
+    ├── todo-list/              # Todo List project
+    ├── tabs/                   # Tabs component project
+    └── contact-form/           # Contact Form project
 ```

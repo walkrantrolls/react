@@ -1,16 +1,18 @@
-name: Deploy Todo List
+name: Deploy React Playground
 
 on:
   push:
     branches: [main]
     paths:
-      - "todo-list/**"
-      - ".github/workflows/deploy-todo-list.yml"
+      - "playground/**"
+      - "projects/**"
+      - ".github/workflows/deploy-react-playground.yml"
   pull_request:
     branches: [main]
     paths:
-      - "todo-list/**"
-      - ".github/workflows/deploy-todo-list.yml"
+      - "playground/**"
+      - "projects/**"
+      - ".github/workflows/deploy-react-playground.yml"
   workflow_dispatch:
 
 permissions:
@@ -35,18 +37,18 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Install dependencies
-        working-directory: todo-list
+        working-directory: playground
         run: npm install --no-audit --no-fund
       - name: Run tests
-        working-directory: todo-list
+        working-directory: playground
         run: npm test
       - name: Build app
-        working-directory: todo-list
+        working-directory: playground
         run: npm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: todo-list/dist
+          path: playground/dist
 
   deploy:
     if: github.event_name != 'pull_request'
