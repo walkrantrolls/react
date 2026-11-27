@@ -3,34 +3,43 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Tabs from "./tabs";
 
+const ITEMS = [
+  { value: "html", label: "HTML", panel: <p>HTML panel content</p> },
+  { value: "css", label: "CSS", panel: <p>CSS panel content</p> },
+  { value: "js", label: "Javascript", panel: <p>JavaScript panel content</p> },
+];
+
 describe("Tabs", () => {
-  it("marks HTML as the active panel by default", () => {
-    render(<Tabs />);
+  it("selects the first item by default and displays its panel", () => {
+    render(<Tabs items={ITEMS} />);
 
-    expect(screen.getByRole("button", { name: "HTML" })).toBeInTheDocument();
-    expect(screen.getByText(/HyperText Markup Language/)).toHaveClass("active");
-    expect(screen.getByText(/Cascading Style Sheets/)).not.toHaveClass("active");
-    expect(screen.getByText(/one of the core technologies/)).not.toHaveClass("active");
+    expect(screen.getByRole("button", { name: "HTML" })).toHaveClass(
+      "tabs-list-item--active",
+    );
+    expect(screen.getByText("HTML panel content").parentElement).not.toHaveAttribute("hidden");
+    expect(screen.getByText("CSS panel content").parentElement).toHaveAttribute("hidden");
   });
 
-  it("marks CSS active after its button is clicked", async () => {
-    const user = userEvent.setup();
-    render(<Tabs />);
+  it("supports a default selected value", () => {
+    render(<Tabs items={ITEMS} defaultValue="css" />);
 
-    await user.click(screen.getByRole("button", { name: "CSS" }));
-
-    expect(screen.getByText(/Cascading Style Sheets/)).toHaveClass("active");
-    expect(screen.getByText(/HyperText Markup Language/)).not.toHaveClass("active");
+    expect(screen.getByRole("button", { name: "CSS" })).toHaveClass(
+      "tabs-list-item--active",
+    );
+    expect(screen.getByText("CSS panel content").parentElement).not.toHaveAttribute("hidden");
+    expect(screen.getByText("HTML panel content").parentElement).toHaveAttribute("hidden");
   });
 
-  it("switches among all three panels", async () => {
+  it("changes the selected button and visible panel when clicked", async () => {
     const user = userEvent.setup();
-    render(<Tabs />);
+    render(<Tabs items={ITEMS} />);
 
-    await user.click(screen.getByRole("button", { name: "JavaScript" }));
-    expect(screen.getByText(/one of the core technologies/)).toHaveClass("active");
+    await user.click(screen.getByRole("button", { name: "Javascript" }));
 
-    await user.click(screen.getByRole("button", { name: "HTML" }));
-    expect(screen.getByText(/HyperText Markup Language/)).toHaveClass("active");
+    expect(screen.getByRole("button", { name: "Javascript" })).toHaveClass(
+      "tabs-list-item--active",
+    );
+    expect(screen.getByText("JavaScript panel content").parentElement).not.toHaveAttribute("hidden");
+    expect(screen.getByText("HTML panel content").parentElement).toHaveAttribute("hidden");
   });
 });

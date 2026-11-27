@@ -2,43 +2,42 @@
 
 ## Problem
 
-Build a tabbed interface that displays one of three related descriptions at a time: HTML, CSS, or JavaScript. Selecting a button changes the visible panel.
+Show one panel of related content at a time, and let the user switch the visible panel by selecting its tab.
 
 ## Concept and implementation
 
-The supplied implementation lives in `projects/tabs/src/`:
+The implementation lives in `projects/tabs/src/`:
 
-- `tabs.tsx` keeps the selected key in React state and updates it from button clicks.
-- `styles.css` applies the base font and visibility rules.
-- `app.tsx` renders the component.
-- `index.tsx` attaches the app to a root in Strict Mode.
+- `app.tsx` supplies an array of items containing `label`, `value`, and `panel`.
+- `tabs.tsx` stores the selected value in React state. It accepts an optional `defaultValue`, otherwise selects the first item.
+- `styles.css` styles the tab buttons and selected state.
+- `index.tsx` mounts the app in Strict Mode.
 
-The playground loads this source through a dedicated Vite demo page in an iframe. That keeps the supplied global `p.active` and `p:not(.active)` selectors scoped to the Tabs project.
+The playground loads the Tabs project through a dedicated Vite page in an iframe. This isolates the project's global `body` style.
 
 ## Execution walkthrough
 
-1. The component initializes `activeTab` to `"html"`.
-2. React renders the HTML, CSS, and JavaScript buttons.
-3. The HTML paragraph receives the `active` class; the others do not.
-4. The stylesheet shows the active paragraph and hides the others.
-5. Clicking a button calls `handleClick` with its tab key.
-6. `setActiveTab` updates state and React applies the active class to the selected paragraph.
+1. The app passes its `TABS_DATA` array to `Tabs`.
+2. `Tabs` initializes `activeTab` from `defaultValue` or the first item's value.
+3. It renders a button for every item's label and marks the selected button with `tabs-list-item--active`.
+4. It renders every panel inside a wrapper; inactive wrappers receive the `hidden` attribute.
+5. Clicking a tab updates `activeTab`, which changes the selected button class and visible panel.
 
 ## Edge cases
 
-- HTML is selected before interaction.
-- Clicking the selected tab keeps the same panel visible.
-- Each fixed button key maps to one panel.
-- The supplied example does not implement keyboard arrow navigation or ARIA tab semantics.
+- At least one item is required because the initial selection reads `items[0].value`.
+- A supplied `defaultValue` should match an item's value.
+- Clicking the currently selected tab keeps that item active.
+- This supplied implementation does not add keyboard arrow navigation or ARIA tab roles.
 
 ## Tests
 
-Run `npm test` from `playground/`. Tests cover initial selection, CSS selection, switching among all three panels, and opening the standalone demo from the project sidebar.
+Run `npm test` from `playground/`. Tests cover default selection, the optional initial value, switching panels, and opening the standalone demo from the project sidebar.
 
 ## Real-world demonstration
 
-The demo models a reference panel that switches among HTML, CSS, and JavaScript descriptions. Tabs also keep related documentation, settings, or product details together in a compact view.
+The content panels describe HTML, CSS, and JavaScript, like a compact reference panel. The same component pattern can organize documentation, settings, or product details.
 
 ## Complexity
 
-The fixed example renders three buttons and three paragraphs. Rendering and a selection update therefore take constant time for this fixed number of tabs, and active state takes constant space.
+For `n` items, rendering creates n buttons and n panel wrappers, so render time and element storage are O(n). Selecting a tab updates one state value in O(1); React then re-renders the O(n) item list.
