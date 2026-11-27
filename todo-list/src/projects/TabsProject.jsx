@@ -1,3 +1,5 @@
+import "./TabsProject.css";
+
 export default function TabsProject() {
   return (
     <iframe
