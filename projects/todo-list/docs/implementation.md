@@ -22,8 +22,6 @@ Task labels render as React text children, so markup-like user input is displaye
 
 Run `npm test` from `playground/`. Tests cover the initial sample tasks, trimmed additions, empty input, plain-text rendering of markup-like input, and deletion.
 
-The project also retains pure task collection helpers in `src/todoModel.js`; their unit tests cover immutable add, toggle, deletion, filtering, and counts independently from this basic UI example.
-
 ## Complexity
 
 For `n` tasks, adding and deleting use array operations that take O(n) time and O(n) additional space. Rendering takes O(n) time and space for the list items.
