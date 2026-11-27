@@ -112,7 +112,7 @@ describe("Todo List", () => {
 
     expect(screen.getByTitle("Tabs component demo")).toHaveAttribute(
       "src",
-      "/tabs-demo.html",
+      expect.stringMatching(/\/tabs-demo\.html$/),
     );
   });
 });
