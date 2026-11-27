@@ -2,44 +2,28 @@
 
 ## Problem
 
-A user needs to create tasks from a text field and remove them from a list. Input must be treated as plain text, and the form must work for keyboard and assistive-technology users.
+Let a user add plain text tasks to a list and delete existing tasks.
 
-## Behavior and decisions
+## Implementation
 
-- A native form handles both button clicks and Enter submissions.
-- A visible submit button and an associated label make the input discoverable.
-- Whitespace is trimmed. Empty input is rejected and retained so the user can correct it.
-- Successful submission appends immutably, clears the field, and announces the addition through a polite live region.
-- Task text is rendered as a React text child; user input is never passed to `innerHTML`.
-- Each task has an individually named delete control.
-- Completion and filtering are included as usability additions.
+`src/App.jsx` contains the complete project implementation. It initializes the list with three sample tasks, stores the input and task array in React state, trims input before adding it, clears the field after a successful add, and removes a task by its id.
 
-## Data model
-
-Each task is a plain object:
-
-```js
-{ id: "unique-id", text: "Prepare project notes", completed: false }
-```
-
-The pure operations in `src/todoModel.js` return new arrays and never mutate the previous list. The project component owns task, filter, draft, and status state.
+Task labels render as React text children, so markup-like user input is displayed as text rather than interpreted as HTML. The input has the accessible name “Add your task.”
 
 ## Execution flow
 
-1. Typing updates the controlled input state.
-2. Form submission prevents navigation and trims the draft.
-3. Blank text announces validation without adding a task or clearing the input.
-4. Valid text is passed to `addTask`, which returns a new array.
-5. React renders the text safely, the input resets, and the live region announces success.
-6. The delete control calls `removeTask`; the returned array omits that task.
-7. Completion state is toggled immutably, while filters derive the visible subset.
+1. The initial task list is created with stable numeric IDs.
+2. Typing updates the controlled `todo` value.
+3. Clicking Submit trims the input and returns without changing the list when it is empty.
+4. A non-empty value is appended immutably and the input is cleared.
+5. Each list item has a Delete button that removes the task by ID.
 
 ## Tests
 
-Run `npm test` from `playground/`. The project tests cover form submission, input clearing, whitespace, safe text rendering, deletion, completion, filters, task counts, and immutable collection operations.
+Run `npm test` from `playground/`. Tests cover the initial sample tasks, trimmed additions, empty input, plain-text rendering of markup-like input, and deletion.
+
+The project also retains pure task collection helpers in `src/todoModel.js`; their unit tests cover immutable add, toggle, deletion, filtering, and counts independently from this basic UI example.
 
 ## Complexity
 
-For `n` tasks, adding, deleting, toggling, filtering, and deriving counts scan or copy the task array in O(n) time. Array-producing operations use O(n) additional space; counting uses O(1).
-
-The list is in-memory and resets on page refresh.
+For `n` tasks, adding and deleting use array operations that take O(n) time and O(n) additional space. Rendering takes O(n) time and space for the list items.

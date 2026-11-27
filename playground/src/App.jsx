@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TodoListProject from "../../projects/todo-list/src/TodoListProject.jsx";
+import TodoListProject from "../../projects/todo-list/src/App.jsx";
 import TabsProject from "../../projects/tabs/TabsProject.jsx";
 
 const PROJECTS = [

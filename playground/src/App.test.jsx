@@ -12,7 +12,8 @@ describe("React project playground", () => {
       "aria-selected",
       "true",
     );
-    expect(screen.getByRole("textbox", { name: "New task" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Add your task" })).toBeInTheDocument();
+    expect(screen.getByText("Walk the dog")).toBeInTheDocument();
   });
 
   it("opens the Tabs project from the project sidebar", async () => {
