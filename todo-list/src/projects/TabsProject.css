@@ -1,0 +1,7 @@
+.tabs-project-frame {
+  display: block;
+  width: 100%;
+  min-height: min(720px, calc(100vh - 70px));
+  border: 0;
+  background: #fff;
+}

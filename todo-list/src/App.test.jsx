@@ -92,6 +92,7 @@ describe("Todo List", () => {
       "true",
     );
   });
+
   it("shows projects as selectable sidebar tabs", () => {
     render(<App />);
 
@@ -102,4 +103,16 @@ describe("Todo List", () => {
     expect(screen.getByRole("tabpanel", { name: /Todo List/ })).toBeInTheDocument();
   });
 
+  it("opens the Tabs project from the sidebar", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const tablist = screen.getByRole("tablist", { name: "React projects" });
+    await user.click(within(tablist).getByRole("tab", { name: /Tabs/ }));
+
+    expect(screen.getByTitle("Tabs component demo")).toHaveAttribute(
+      "src",
+      expect.stringMatching(/\/tabs-demo\.html$/),
+    );
+  });
 });

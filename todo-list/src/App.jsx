@@ -6,6 +6,7 @@ import {
   removeTask,
   toggleTask,
 } from "./todoModel.js";
+import TabsProject from "./projects/TabsProject.jsx";
 
 function TodoListProject() {
   const [tasks, setTasks] = useState([]);
@@ -180,6 +181,12 @@ const PROJECTS = [
     label: "Todo List",
     summary: "Task manager",
     component: TodoListProject,
+  },
+  {
+    id: "tabs",
+    label: "Tabs",
+    summary: "Reusable UI component",
+    component: TabsProject,
   },
 ];
 
