@@ -28,4 +28,17 @@ describe("React project playground", () => {
       expect.stringMatching(/\/tabs-demo\.html$/),
     );
   });
+
+  it("opens the Contact Form project from the project sidebar", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const tablist = screen.getByRole("tablist", { name: "React projects" });
+    await user.click(within(tablist).getByRole("tab", { name: /Contact Form/ }));
+
+    expect(screen.getByTitle("Contact form demo")).toHaveAttribute(
+      "src",
+      expect.stringMatching(/\/contact-form-demo\.html$/),
+    );
+  });
 });

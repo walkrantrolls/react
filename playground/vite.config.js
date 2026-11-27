@@ -13,6 +13,7 @@ export default defineConfig({
       input: {
         main: resolve(projectRoot, "index.html"),
         tabsDemo: resolve(projectRoot, "tabs-demo.html"),
+        contactFormDemo: resolve(projectRoot, "contact-form-demo.html"),
       },
     },
   },

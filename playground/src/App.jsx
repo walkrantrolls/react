@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoListProject from "../../projects/todo-list/src/App.jsx";
 import TabsProject from "../../projects/tabs/TabsProject.jsx";
+import ContactFormProject from "../../projects/contact-form/ContactFormProject.jsx";
 
 const PROJECTS = [
   {
@@ -14,6 +15,12 @@ const PROJECTS = [
     label: "Tabs",
     summary: "Reusable UI component",
     component: TabsProject,
+  },
+  {
+    id: "contact-form",
+    label: "Contact Form",
+    summary: "Form submission",
+    component: ContactFormProject,
   },
 ];
 

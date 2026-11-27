@@ -4,14 +4,15 @@ A collection of React projects and experiments. Each project has its own impleme
 
 ## Projects
 
-- [Todo List](./projects/todo-list/) — accessible task manager with safe form handling, task completion, filtering, and deletion.
+- [Todo List](./projects/todo-list/) — task creation and deletion with plain-text rendering.
 - [Tabs](./projects/tabs/) — the supplied HTML/CSS/JavaScript tabs component challenge.
+- [Contact Form](./projects/contact-form/) — a labeled form that submits JSON to the GreatFrontEnd endpoint.
 
 ## Live playground
 
 [Open the React playground](https://walkrantrolls.github.io/react/)
 
-The sidebar switches between the Todo List and Tabs projects.
+The sidebar switches between the Todo List, Tabs, and Contact Form projects.
 
 ## Run locally
 
@@ -39,13 +40,11 @@ react/
 │   ├── src/
 │   ├── index.html
 │   ├── tabs-demo.html
+│   ├── contact-form-demo.html
 │   ├── package.json
 │   └── vite.config.js
 └── projects/
     ├── todo-list/              # Todo List project
-    │   ├── src/
-    │   └── docs/
-    └── tabs/                   # Tabs component project
-        ├── src/
-        └── docs/
+    ├── tabs/                   # Tabs component project
+    └── contact-form/           # Contact Form project
 ```
